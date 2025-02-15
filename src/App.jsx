@@ -1,10 +1,21 @@
-function App() {
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skill from "./components/Skill";
+import Project from "./components/Project";
+import Contact from "./components/Contact";
 
+function App() {
   return (
-    <>
-      <h1 className="text-lg font-bold">Hello World!</h1>
-    </>
-  )
+    <div>
+      <Header />
+      <Hero />
+      <About />
+      <Skill />
+      <Project />
+      <Contact />
+    </div>
+  );
 }
 
-export default App
+export default App;
