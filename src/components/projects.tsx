@@ -173,7 +173,7 @@ export function Projects() {
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="mt-12"
+        className="flex justify-center"
       >
         <UpArrow href="#home" />
       </motion.div>
