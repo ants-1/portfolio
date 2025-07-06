@@ -14,7 +14,7 @@ const projects = [
         id: 1,
         title: "Roofsy - Real Estate App",
         description: "A full-stack real estate platform built with Next.js, TypeScript, and Supabase. Features include property listings, user authentication, image uploads, advanced search, and secure payments. Designed with TailwindCSS and integrated with PostgreSQL for robust data management.",
-        image: "/roofsy.png",
+        image: "/roofsy.jpeg",
         technologies: ["Next.js", "TypeScript", "Supabase", "TailwindCSS", "PostgreSQL"],
         liveUrl: "https://roofsy.vercel.app/",
         codeUrl: "https://github.com/ants-1/roofsy",
@@ -23,7 +23,7 @@ const projects = [
         id: 2,
         title: "Linko - Travel Blog and Chat App",
         description: "A full-stack social blogging platform for travelers to share stories and chat in real time. Built with React, Node.js, Express, and Socket.io for instant messaging. Uses MongoDB for flexible data storage and TypeScript for strong typing. Includes authentication, blog CRUD, and Material UI design.",
-        image: "/linko.png",
+        image: "/linko.jpeg",
         technologies: ["React", "Node.js", "Socket.io", "MongoDB", "Express", "TypeScript", "Material UI", "Redux"],
         liveUrl: "https://linko-3w76.onrender.com/",
         codeUrl: "https://github.com/ants-1/linko",
@@ -60,6 +60,8 @@ export function Projects() {
                                 <Image
                                     src={project.image}
                                     alt={project.title}
+                                    width={600}
+                                    height={400}
                                     className={`w-full h-full ${project.id === 3 ? "object-contain" : "object-fit"
                                         }`}
                                 />
