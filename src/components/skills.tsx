@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { DownArrow } from "./down-arrow";
 
 import {
@@ -42,8 +43,8 @@ const frontendSkills = [
     { name: "Next.js", icon: <SiNextdotjs className="w-10 h-10 text-blue-400" /> },
     { name: "Tailwind CSS", icon: <SiTailwindcss className="w-10 h-10 text-blue-400" /> },
     { name: "Material UI", icon: <SiMui className="w-10 h-10 text-blue-400" /> },
-    { name: "HTML", icon: <SiHtml5 className="w-10 h-10 text-blue-400" />},
-    { name: "CSS", icon: <SiCss3 className="w-10 h-10 text-blue-400" />},
+    { name: "HTML", icon: <SiHtml5 className="w-10 h-10 text-blue-400" /> },
+    { name: "CSS", icon: <SiCss3 className="w-10 h-10 text-blue-400" /> },
 ];
 
 const backendSkills = [
@@ -71,71 +72,81 @@ export function Skills() {
             id="skills"
             className="relative bg-gray-50 dark:bg-gray-900 min-h-[calc(100vh-4rem)] xl:min-h-screen flex flex-col items-center justify-center px-4 py-36 xl:py-0"
         >
-            <div className="text-center mb-[2rem] max-w-7xl w-full">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true }}
+                className="text-center mb-[2rem] max-w-7xl w-full"
+            >
                 <h1 className="text-5xl font-bold mb-18">
                     Skills<span className="text-blue-400">.</span>
                 </h1>
-                <div className="flex items-center justify-center flex-wrap gap-10">
-                    <Card className="w-full max-w-sm min-h-[26rem]">
-                        <CardHeader>
-                            <CardTitle className="font-semibold text-lg">Front-end</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="flex flex-wrap justify-center items-center gap-1 text-gray-700 dark:text-gray-300">
-                                {frontendSkills.map(({ name, icon }) => (
-                                    <li
-                                        key={name}
-                                        className="flex flex-col items-center justify-center w-24 h-24"
-                                    >
-                                        {icon}
-                                        <span className="mt-2 text-center text-gray-600 dark:text-gray-400">{name}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </CardContent>
-                    </Card>
+            </motion.div>
 
-                    <Card className="w-full max-w-sm min-h-[26rem]">
-                        <CardHeader>
-                            <CardTitle className="font-semibold text-lg">Back-end</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="flex flex-wrap justify-center items-center gap-1 text-gray-700 dark:text-gray-300">
-                                {backendSkills.map(({ name, icon }) => (
-                                    <li
-                                        key={name}
-                                        className="flex flex-col items-center justify-center w-24 h-24"
-                                    >
-                                        {icon}
-                                        <span className="mt-2 text-center text-gray-600 dark:text-gray-400">{name}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="w-full max-w-sm min-h-[26rem]">
-                        <CardHeader>
-                            <CardTitle className="font-semibold text-lg">Miscellaneous</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="flex flex-wrap justify-center items-center gap-1 text-gray-700 dark:text-gray-300">
-                                {miscellaneousSkills.map(({ name, icon }) => (
-                                    <li
-                                        key={name}
-                                        className="flex flex-col items-center justify-center w-24 h-24"
-                                    >
-                                        {icon}
-                                        <span className="mt-2 text-center text-gray-600 dark:text-gray-400">{name}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </CardContent>
-                    </Card>
-
-                </div>
+            <div className="flex items-center justify-center flex-wrap gap-10">
+                {[
+                    { title: "Front-end", skills: frontendSkills },
+                    { title: "Back-end", skills: backendSkills },
+                    { title: "Miscellaneous", skills: miscellaneousSkills },
+                ].map(({ title, skills }) => (
+                    <motion.div
+                        key={title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        viewport={{ once: true }}
+                    >
+                        <Card className="w-full max-w-sm min-h-[26rem]">
+                            <CardHeader>
+                                <CardTitle className="font-semibold text-lg">{title}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <motion.ul
+                                    className="flex flex-wrap justify-center items-center gap-1 text-gray-700 dark:text-gray-300"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true }}
+                                    variants={{
+                                        visible: {
+                                            transition: {
+                                                staggerChildren: 0.05,
+                                            },
+                                        },
+                                    }}
+                                >
+                                    {skills.map(({ name, icon }) => (
+                                        <motion.li
+                                            key={name}
+                                            variants={{
+                                                hidden: { opacity: 0, y: 10 },
+                                                visible: { opacity: 1, y: 0 },
+                                            }}
+                                            transition={{ duration: 0.3, ease: "easeOut" }}
+                                            className="flex flex-col items-center justify-center w-24 h-24"
+                                        >
+                                            {icon}
+                                            <span className="mt-2 text-center text-gray-600 dark:text-gray-400">
+                                                {name}
+                                            </span>
+                                        </motion.li>
+                                    ))}
+                                </motion.ul>
+                            </CardContent>
+                        </Card>
+                    </motion.div>
+                ))}
             </div>
-            <DownArrow href="#projects" />
+
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+                viewport={{ once: true }}
+                className="mt-12"
+            >
+                <DownArrow href="#projects" />
+            </motion.div>
         </section>
     );
 }
